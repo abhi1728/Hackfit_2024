@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('proctored') }}"><i class="far fa-address-book"></i>proctored exam</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('assignments') }}"><i class="far fa-clone"></i>Assignments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('creative_writing') }}"><i class="far fa-calendar-alt"></i>creative writing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="assessment-section">
+        <h1>Assignment Assessment</h1>
+        <p>Submit your text for plagiarism checking. The AI checker will provide a plagiarism percentage.</p>
+
+        <div class="due-assignments">
+            <h2>Due Assignments</h2>
+            <ul>
+                <li>Assignment 1: Introduction to Programming - Due: 20th August 2024</li>
+                <li>Assignment 2: Data Structures - Due: 25th August 2024</li>
+            </ul>
+        </div>
+
+        <form class="assessment-form" action="{{ url_for('check_plagiarism') }}" method="POST">
+            <label for="text-input">Submit Text:</label>
+            <textarea id="text-input" name="text-input" rows="10" cols="50" required></textarea>
+
+            <button type="submit">Submit for Checking</button>
+        </form>
+
+        {% if result %}
+            <div class="plagiarism-result">
+                <h2>Plagiarism Check Result</h2>
+                <p>Probability of AI generated Text is: <span>{{ result }}</span></p>
+            </div>
+        {% endif %}
+    </section>
+    </main>
+</body>
+</html>

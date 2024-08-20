@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proctored Exam</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('proctored') }}"><i class="far fa-address-book"></i>proctored exam</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('assignments') }}"><i class="far fa-clone"></i>Assignments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('creative_writing') }}"><i class="far fa-calendar-alt"></i>creative writing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="exam-section">
+            <h1>Conduct Your Proctored Exam</h1>
+            <p>Select your preferences for the proctored exam. The AI assistant will monitor you during the test to ensure academic integrity.</p>
+
+            <form action="/onlineproctored" class="exam-form">
+                <label for="topic">Select Topic:</label>
+                <select id="topic" name="topic">
+                    <option value="math">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="programming">Programming</option>
+                    <option value="history">History</option>
+                </select>
+
+                <label for="type">Type of Exam:</label>
+                <select id="type" name="type">
+                    <option value="mcq">Multiple Choice Questions</option>
+                    <option value="written">Written</option>
+                </select>
+
+                <label for="duration">Duration:</label>
+                <select id="duration" name="duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60">1 hour</option>
+                    <option value="120">2 hours</option>
+                </select>
+
+                <label for="difficulty">Difficulty Level:</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <button type="submit">Start Exam</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

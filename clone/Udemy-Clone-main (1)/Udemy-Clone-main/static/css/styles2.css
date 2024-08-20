@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #5e17eb;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    margin: 2rem;
+}
+
+.assessment-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.assessment-section h1 {
+    color: #5e17eb;
+}
+
+.assessment-section p {
+    color: #333;
+}
+
+.due-assignments {
+    margin-bottom: 2rem;
+}
+
+.due-assignments h2 {
+    color: #5e17eb;
+    margin-bottom: 1rem;
+}
+
+.due-assignments ul {
+    list-style: none;
+    padding: 0;
+}
+
+.due-assignments ul li {
+    background-color: #f2f2f2;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+.assessment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.assessment-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.assessment-form input[type="file"] {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.assessment-form button {
+    padding: 1rem;
+    background-color: #5e17eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.assessment-form button:hover {
+    background-color: #450ca8;
+}
+
+.plagiarism-result {
+    padding: 1rem;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.plagiarism-result h2 {
+    color: #5e17eb;
+    margin-bottom: 1rem;
+}
+
+.plagiarism-result p {
+    font-size: 1.2rem;
+}

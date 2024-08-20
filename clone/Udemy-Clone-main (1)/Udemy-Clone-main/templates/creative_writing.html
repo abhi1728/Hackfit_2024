@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Idea Generation Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  
+ 
+<div class="header">
+   <h1>IDEA GENERATION ASSISSTANT</h1>
+   <p>A guide to aspiring writers</p>
+ </div>
+ <style>
+   body {
+       background-image: url("{{ url_for('static', filename='static/images/cbg.svg') }}");
+       background-repeat: no-repeat;
+       background-attachment: fixed; 
+       background-size: cover;
+   }
+</style>
+ 
+</head>
+ 
+<body>
+   <nav class="navbar navbar-expand-custom navbar-mainbg">
+        
+      <a class="navbar-brand navbar-logo" href="#"></a>
+      <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+              <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+              <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('home') }}"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+           </li>
+           <li class="nav-item active">
+               <a class="nav-link" href="{{ url_for('proctored') }}"><i class="far fa-address-book"></i>proctored exam</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('assignments') }}"><i class="far fa-clone"></i>Assignments</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('creative_writing') }}"><i class="far fa-calendar-alt"></i>creative writing</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+           </li>
+          </ul>
+      </div>
+  </nav>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles3.css') }}">
+
+ 
+  
+ 
+   <div class="timer">  <form name="Form1" action="mypage.asp" method="get"></form>
+ 
+  <form>
+     <input type="number" name="hours" id="hours" min="00" max="24">
+ 
+ 
+     Hours &nbsp;
+     <select name="minutes" id="minutes">
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+     </select>
+     Minutes
+     <br>
+     <button type="button" class='btn' onclick="checkTime()" id="time_submit_button" style="font-size:15px">Submit Time</button>
+ 
+  
+    
+  </form>
+ 
+</div> 
+ 
+  <div id="total_time" style="font-size:30px" >Total Time:</div>
+  <div id="word_time" style="font-size:30px">Next Word in:</div>
+  <div id="random_word" style="font-size:30px">Your Word:</div>
+  <div class='YourStory' style="font-size:30px"><p>Your Story</p></div>
+ 
+  <textarea rows="10" cols="90" id="autoresizing" style="font-size:30px" placeholder="Start your story here...." disabled></textarea>
+   
+  <div class='wordgen'>
+  <script>
+     document.getElementById("autoresizing").addEventListener("input", function(){
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight+'px';
+     });
+     var random_word_div = document.getElementById("random_word");
+     var random_words = ['arrow','black','canary', 'siren', 'flash', 'red',"archery"];
+     function startTimer(duration, display_element, reset_count=0) {
+        random_word_index = 0;
+        random_word_div.innerHTML="Your Word: <b>"+random_words[random_word_index]+ "</b><br> random words left :"+ (reset_count-1);
+        var timer = duration;
+        var countDown = setInterval(function () {
+        var seconds = parseInt(timer % 60, 10);
+        var minutes = parseInt((timer / 60) % 60, 10);
+        var hours = parseInt((timer / 60) / 60, 10);
+           minutes = minutes < 10 ? "0" + minutes : minutes;
+           seconds = seconds < 10 ? "0" + seconds : seconds;
+           if (display_element.id == "total_time"){
+              display_element.innerHTML = hours != 0 ? "Total Time: " + hours+"hrs : " : 'Total Time: ';
+              display_element.innerHTML += minutes == 0 ? seconds+"s" : minutes + "m : " + seconds+"s";
+           }
+           else{
+              display_element.innerHTML = hours != 0 ? "Next Word in: " + hours+"hrs : " : 'Next Word in: ';
+              display_element.innerHTML += minutes == 0 ? seconds+"s" : minutes + "m : " + seconds+"s";
+           }
+         
+           if (--timer < 0) {
+              --reset_count;
+              if (reset_count > 0 ){
+                 random_word_index++;
+                 random_word_div.innerHTML="Your Word: <b>"+random_words[random_word_index]+ "</b><br> random words left :"+ (reset_count-1);
+                 timer = duration;
+              }
+              else{
+                 clearInterval(countDown);
+              }
+           }
+        }, 1000);
+     }
+     var minute = 60;
+     var totalTime = document.querySelector('#total_time');
+     var wordTime =  document.querySelector('#word_time');
+     var storyText = document.getElementById("autoresizing");
+     var timeButton = document.getElementById("time_submit_button");
+     function checkTime() {
+        hours = document.getElementById("hours");
+        minutes = document.getElementById("minutes");
+        activate_time = false;
+        if (hours.value < 1) {
+           if (minutes.value < 45) {
+              alert("Aleast Select 45 minutes");
+           }
+           else{
+           activate_time = true;
+           }
+        }
+        else{
+           activate_time = true;
+        }
+        if (activate_time) {
+           hours.disabled=true;
+           minutes.disabled=true;
+           storyText.disabled=false;
+           timeButton.remove();
+           total_minutes = (hours.value*60)+parseInt(minutes.value);
+           total_random_words = (total_minutes-30) / 15;
+           startTimer(minute *total_minutes, totalTime, reset_count=0);
+           startTimer(minute *15, wordTime, reset_count=total_random_words);
+        }
+     }
+    
+   function test(){
+     var tabsNewAnim = $('#navbarSupportedContent');
+     var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+     var activeItemNewAnim = tabsNewAnim.find('.active');
+     var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+     var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+     var itemPosNewAnimTop = activeItemNewAnim.position();
+     var itemPosNewAnimLeft = activeItemNewAnim.position();
+     $(".hori-selector").css({
+       "top":itemPosNewAnimTop.top + "px", 
+       "left":itemPosNewAnimLeft.left + "px",
+       "height": activeWidthNewAnimHeight + "px",
+       "width": activeWidthNewAnimWidth + "px"
+     });
+     $("#navbarSupportedContent").on("click","li",function(e){
+       $('#navbarSupportedContent ul li').removeClass("active");
+       $(this).addClass('active');
+       var activeWidthNewAnimHeight = $(this).innerHeight();
+       var activeWidthNewAnimWidth = $(this).innerWidth();
+       var itemPosNewAnimTop = $(this).position();
+       var itemPosNewAnimLeft = $(this).position();
+       $(".hori-selector").css({
+         "top":itemPosNewAnimTop.top + "px", 
+         "left":itemPosNewAnimLeft.left + "px",
+         "height": activeWidthNewAnimHeight + "px",
+         "width": activeWidthNewAnimWidth + "px"
+       });
+     });
+   }
+   $(document).ready(function(){
+     setTimeout(function(){ test(); });
+   });
+   $(window).on('resize', function(){
+     setTimeout(function(){ test(); }, 500);
+   });
+   $(".navbar-toggler").click(function(){
+     $(".navbar-collapse").slideToggle(300);
+     setTimeout(function(){ test(); });
+   });
+   
+   
+   
+   // --------------add active class-on another-page move----------
+   jQuery(document).ready(function($){
+     // Get current path and find target link
+     var path = window.location.pathname.split("/").pop();
+   
+     // Account for home page with empty path
+     if ( path == '' ) {
+       path = 'index.html';
+     }
+   
+     var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
+     // Add active class to target link
+     target.parent().addClass('active');
+   });
+   
+   
+   
+   
+   
+   
+   </script>
+  </div>
+</body>
+</html>

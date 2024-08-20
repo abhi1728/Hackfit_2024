@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contract Interaction</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            align-items: center;
+            justify-content:center;
+            padding:center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        div {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"], input[type="number"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        #selectedFile {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        #showFileBtn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Ethereum Smart Contract Interaction</h2>
+    <div>
+        <h3>Upload a File:</h3>
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <p>Selected File: <span id="selectedFile">None</span></p>
+    </div>
+    <button onclick="Connect()">Connect</button>
+
+    <div>
+        <label for="amount">Enter No of Files:</label>
+        <input type="number" id="amount" placeholder="Enter No">
+    </div>
+
+    <div>
+        <button onclick="deposit()">Encrypt</button>
+        <button id="decryptBtn" onclick="withdraw()">Decrypt</button>
+        <button id="showFileBtn">Show Image</button>
+        <div id="fileDisplay">
+            <img id="uploadedImage" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+
+    <div>
+        <h3>Current no of files: <span id="balance">0</span></h3>
+        <button onclick="show_balance()">Show Number of Files</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='static/js/index.js') }}"></script>
+    <script>
+        // Handle file upload and display the file name
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            if (event.target.files.length > 0) {
+                var fileName = event.target.files[0].name;
+                document.getElementById('selectedFile').innerText = fileName;
+            } else {
+                document.getElementById('selectedFile').innerText = "None";
+            }
+        });
+
+        function withdraw() {
+            // Simulate decryption process
+            const decryptionSuccessful = true; // Change this based on actual decryption logic
+
+            if (decryptionSuccessful) {
+                document.getElementById('showFileBtn').style.display = 'inline-block';
+            } else {
+                alert('Decryption failed. Please try again.');
+            }
+        }
+
+        document.getElementById('showFileBtn').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadedImage = document.getElementById('uploadedImage');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                
+                // Check if the selected file is an image
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+
+                    // Once the file is read, display it as an image
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload a valid image file.');
+                }
+            } else {
+                alert('No file selected.');
+            }
+        });
+    </script>
+</body>
+</html>
